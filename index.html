@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#02050a"
+    >
+
+    <meta
+        name="description"
+        content="CHAOS.EXE - An interactive browser chaos experiment."
+    >
+
+    <title>CHAOS.EXE</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =================================================
+         PARTICLE CANVAS
+    ================================================== -->
+
+    <canvas
+        id="particleCanvas"
+        aria-hidden="true"
+    ></canvas>
+
+
+    <!-- =================================================
+         BACKGROUND
+    ================================================== -->
+
+    <div
+        class="background"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =================================================
+         CODE RAIN
+    ================================================== -->
+
+    <div
+        id="codeRain"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =================================================
+         CURSOR GLOW
+    ================================================== -->
+
+    <div
+        id="cursorGlow"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =================================================
+         MAIN APPLICATION
+    ================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <header class="hero">
+
+            <div class="warning">
+                ⚠ EXPERIMENTAL SYSTEM ⚠
+            </div>
+
+
+            <h1>
+                CHAOS<span>.EXE</span>
+            </h1>
+
+
+            <p class="subtitle">
+
+                A perfectly normal website.
+
+                <br>
+
+                Probably.
+
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             CHAOS CORE
+        ================================================== -->
+
+        <section
+            class="core"
+            aria-label="Chaos Core"
+        >
+
+
+            <!-- CORE STATUS -->
+
+            <div class="core-status">
+
+                <span class="status-dot"></span>
+
+                <span id="coreStatus">
+                    CORE ONLINE
+                </span>
+
+            </div>
+
+
+            <!-- MAIN CHAOS BUTTON -->
+
+            <button
+                id="chaosButton"
+                aria-label="Activate Chaos"
+            >
+
+                <span>
+                    PRESS
+                </span>
+
+                <strong>
+                    ME
+                </strong>
+
+                <small id="buttonHint">
+                    DO IT.
+                </small>
+
+            </button>
+
+
+            <!-- SYSTEM MESSAGE -->
+
+            <div
+                class="eventBox"
+                aria-live="polite"
+            >
+
+                <div class="eventLabel">
+
+                    <span>
+                        SYSTEM MESSAGE
+                    </span>
+
+                    <span id="eventRarity">
+                        COMMON
+                    </span>
+
+                </div>
+
+
+                <p id="message">
+                    Don't you dare.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BASIC STATS
+        ================================================== -->
+
+        <section class="stats">
+
+
+            <!-- CLICKS -->
+
+            <div class="stat">
+
+                <span>
+                    CLICKS
+                </span>
+
+                <strong id="clickCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <!-- CHAOS LEVEL -->
+
+            <div class="stat chaosStat">
+
+                <span>
+                    CHAOS LEVEL
+                </span>
+
+
+                <div class="bar">
+
+                    <div id="chaosBar"></div>
+
+                </div>
+
+
+                <strong id="chaosPercent">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <!-- SESSION TIME -->
+
+            <div class="stat">
+
+                <span>
+                    SESSION
+                </span>
+
+                <strong id="sessionTime">
+                    00:00
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRESSION
+        ================================================== -->
+
+        <section class="progression">
+
+
+            <div class="stage-label">
+                CURRENT SYSTEM STATUS
+            </div>
+
+
+            <h2 id="stageName">
+                SYSTEM STABLE
+            </h2>
+
+
+            <p id="stageDescription">
+                Everything appears normal.
+            </p>
+
+
+            <div class="stageProgress">
+
+                <div id="stageProgressBar"></div>
+
+            </div>
+
+
+            <div class="stageInfo">
+
+                <span id="stageNumber">
+                    STAGE 1 / 6
+                </span>
+
+
+                <span id="nextStage">
+                    NEXT: SYSTEM UNSTABLE
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTROL DASHBOARD
+        ================================================== -->
+
+        <section class="dashboard">
+
+
+            <!-- EVENT ARCHIVE -->
+
+            <button
+                class="panelButton"
+                id="archiveButton"
+            >
+
+                <span>
+                    ◈
+                </span>
+
+                EVENT ARCHIVE
+
+                <b id="eventCount">
+                    0/24
+                </b>
+
+            </button>
+
+
+            <!-- ACHIEVEMENTS -->
+
+            <button
+                class="panelButton"
+                id="achievementButton"
+            >
+
+                <span>
+                    ◇
+                </span>
+
+                ACHIEVEMENTS
+
+                <b id="achievementCount">
+                    0/12
+                </b>
+
+            </button>
+
+
+            <!-- CHAOS TERMINAL -->
+
+            <button
+                class="panelButton"
+                id="terminalButton"
+            >
+
+                <span>
+                    ⌘
+                </span>
+
+                CHAOS TERMINAL
+
+                <b>
+                    ACCESS
+                </b>
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             UTILITY BUTTONS
+        ================================================== -->
+
+        <div class="utilityRow">
+
+
+            <button
+                id="soundButton"
+                class="utilityButton"
+            >
+                🔊 SOUND ON
+            </button>
+
+
+            <button
+                id="resetButton"
+                class="utilityButton danger"
+            >
+                RESET EXPERIMENT
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TIP
+        ================================================== -->
+
+        <div
+            class="tip"
+            id="tip"
+        >
+
+            Tip:
+            Some things happen when you
+            <span>don't</span>
+            press the button.
+
+        </div>
+
+    </main>
+
+
+    <!-- =================================================
+         ACHIEVEMENT POPUP
+    ================================================== -->
+
+    <div
+        id="achievementPopup"
+        role="status"
+        aria-live="polite"
+    >
+
+        <div class="achievementIcon">
+            🏆
+        </div>
+
+
+        <div>
+
+            <small>
+                ACHIEVEMENT UNLOCKED
+            </small>
+
+
+            <strong id="achievementName">
+                FIRST CONTACT
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         EVENT TOAST
+    ================================================== -->
+
+    <div
+        id="eventToast"
+        class="eventToast"
+        aria-live="polite"
+    >
+
+        <span id="toastRarity">
+            RARE
+        </span>
+
+
+        <strong id="toastName">
+            ANOMALY
+        </strong>
+
+    </div>
+
+
+    <!-- =================================================
+         EVENT ARCHIVE MODAL
+    ================================================== -->
+
+    <div
+        id="archiveModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modalBackdrop"
+            data-close="archive"
+        ></div>
+
+
+        <section
+            class="modalCard"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="archiveTitle"
+        >
+
+
+            <button
+                class="modalClose"
+                data-close="archive"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div class="modalKicker">
+                RECOVERED SYSTEM DATA
+            </div>
+
+
+            <h2 id="archiveTitle">
+                EVENT ARCHIVE
+            </h2>
+
+
+            <p class="modalSub">
+
+                <span id="archiveCount">
+                    0
+                </span>
+
+                / 24 anomalies recovered.
+
+            </p>
+
+
+            <div
+                id="archiveGrid"
+                class="archiveGrid"
+            ></div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =================================================
+         ACHIEVEMENT MODAL
+    ================================================== -->
+
+    <div
+        id="achievementModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modalBackdrop"
+            data-close="achievement"
+        ></div>
+
+
+        <section
+            class="modalCard"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="achievementTitle"
+        >
+
+
+            <button
+                class="modalClose"
+                data-close="achievement"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div class="modalKicker">
+                USER PROGRESSION
+            </div>
+
+
+            <h2 id="achievementTitle">
+                ACHIEVEMENTS
+            </h2>
+
+
+            <p class="modalSub">
+
+                <span id="achievementModalCount">
+                    0
+                </span>
+
+                / 12 unlocked.
+
+            </p>
+
+
+            <div
+                id="achievementGrid"
+                class="achievementGrid"
+            ></div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =================================================
+         CHAOS TERMINAL
+    ================================================== -->
+
+    <div
+        id="terminalModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modalBackdrop"
+            data-close="terminal"
+        ></div>
+
+
+        <section
+            class="terminalCard"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="terminalTitle"
+        >
+
+
+            <button
+                class="modalClose"
+                data-close="terminal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div class="modalKicker">
+                RESTRICTED INTERFACE
+            </div>
+
+
+            <h2 id="terminalTitle">
+                CHAOS TERMINAL
+            </h2>
+
+
+            <div
+                id="terminalOutput"
+                class="terminalOutput"
+            >
+
+                <div>
+                    CHAOS TERMINAL v1.0
+                </div>
+
+
+                <div>
+                    Type
+                    <b>help</b>
+                    for commands.
+                </div>
+
+            </div>
+
+
+            <form
+                id="terminalForm"
+                class="terminalForm"
+            >
+
+                <span>
+                    &gt;
+                </span>
+
+
+                <input
+                    id="terminalInput"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Terminal command"
+                >
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+    <!-- =================================================
+         MINI GAME
+    ================================================== -->
+
+    <div
+        id="miniGameModal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modalBackdrop"
+            data-close="mini"
+        ></div>
+
+
+        <section
+            class="miniCard"
+            role="dialog"
+            aria-modal="true"
+        >
+
+
+            <button
+                class="modalClose"
+                data-close="mini"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <div class="modalKicker">
+                EMERGENCY PROTOCOL
+            </div>
+
+
+            <h2 id="miniGameTitle">
+                REACTION TEST
+            </h2>
+
+
+            <p id="miniGameText">
+                Wait for the core to turn green,
+                then click it.
+            </p>
+
+
+            <button
+                id="miniGameButton"
+                class="miniGameButton"
+            >
+                WAIT...
+            </button>
+
+
+            <div
+                id="miniGameResult"
+                class="miniGameResult"
+            ></div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =================================================
+         SYSTEM FAILURE
+    ================================================== -->
+
+    <div
+        id="failureOverlay"
+        aria-hidden="true"
+    >
+
+        <div class="failureNoise"></div>
+
+
+        <div class="failureContent">
+
+            <div class="failureCode">
+                ERR_0xCHAOS
+            </div>
+
+
+            <h2>
+                SYSTEM FAILURE
+            </h2>
+
+
+            <p>
+                YOU BROKE THE EXPERIMENT.
+            </p>
+
+
+            <small>
+                ...and it kept running.
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SECRET OVERLAY
+    ================================================== -->
+
+    <div
+        id="secretOverlay"
+        aria-hidden="true"
+    >
+
+        <div
+            class="secretText"
+            id="secretText"
+        >
+            ACCESS GRANTED
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
